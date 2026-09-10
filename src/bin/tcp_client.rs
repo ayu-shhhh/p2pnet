@@ -7,6 +7,10 @@ fn main() -> Result<(), std::io::Error>
 
         let message = b"pikachu";
         protocol::write_message(&mut stream, message)?;
+        let message = b"pikachu";
+        protocol::write_message(&mut stream, message)?;
+        let message = b"pikachu";
+        protocol::write_message(&mut stream, message)?;
         
         Ok(())
 }

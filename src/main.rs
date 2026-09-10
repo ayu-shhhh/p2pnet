@@ -10,8 +10,13 @@ fn main() -> Result<(), std::io::Error>
     let (mut stream, address) = listener.accept()?;
     println!("Connection from {}", address);
 
-    let payload = protocol::read_message(&mut stream)?;
-    println!("Payload bytes: {:?}", str::from_utf8(&payload).unwrap());
+    for _ in 0..3
+    {
+        let payload = protocol::read_message(&mut stream)?;
+        println!("Payload bytes: {:?}", str::from_utf8(&payload).unwrap());
+    }
+
+    
 
     Ok(())
 }
