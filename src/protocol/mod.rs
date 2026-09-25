@@ -1,6 +1,7 @@
 use std::io::{Read, Write};
+use crate::error;
 
-pub fn read_message(stream: &mut impl Read) -> Result< Option<Vec<u8>> , std::io::Error>
+pub fn read_message(stream: &mut impl Read) -> Result< Option<Vec<u8>> , error::ProtocolError>
 {
         let mut message_length_buffer = [0u8; 4];
 
@@ -24,7 +25,7 @@ pub fn read_message(stream: &mut impl Read) -> Result< Option<Vec<u8>> , std::io
         Ok(Some(payload))
 }
 
-pub fn write_message(stream: &mut impl Write, message: &[u8]) -> Result<(), std::io::Error>
+pub fn write_message(stream: &mut impl Write, message: &[u8]) -> Result<(), error::ProtocolError>
 {
         let length: u32 = message.len().try_into().unwrap();
 
