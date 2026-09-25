@@ -24,12 +24,13 @@ pub fn listen() -> Result<(), ProtocolError>
                                 }
 
                                 Ok(None) => {
-                                        println!("Connection closed by Peer!");
+                                        // println!("Connection closed by Peer!");
                                         break;
                                 }
 
                                 Err(error) => {
                                         eprintln!("Receive error: {:?}", error);
+                                        break;
                                 }
                         }
                 }
@@ -63,7 +64,7 @@ pub fn connect() -> Result< (), ProtocolError>
                                 }
 
                                 Ok(None) => {
-                                        println!("Connection closed by Peer!");
+                                        // println!("Connection closed by Peer!");
                                         break;
                                 }
 
@@ -82,7 +83,7 @@ pub fn connect() -> Result< (), ProtocolError>
 
                 if let Err(_error) = protocol::write_message(&mut send_stream, input.trim_end().as_bytes())
                 {
-                        eprintln!("Connection closed.");
+                        eprintln!("Failed to send message. Connection closed by peer.");
                         break Ok(());
                 }
         }
