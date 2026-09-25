@@ -5,9 +5,9 @@ use std::thread;
 use crate::error::ProtocolError;
 use crate::protocol;
 
-pub fn listen() -> Result<(), ProtocolError>
+pub fn listen(address: &str) -> Result<(), ProtocolError>
 {
-        let listener = TcpListener::bind("127.0.0.1:8000")?;
+        let listener = TcpListener::bind(address)?;
         println!("Server Listening!");
 
         let (mut send_stream, address) = listener.accept()?;
@@ -49,9 +49,9 @@ pub fn listen() -> Result<(), ProtocolError>
         }
 }
 
-pub fn connect() -> Result< (), ProtocolError>
+pub fn connect(address: &str) -> Result< (), ProtocolError>
 {
-        let mut send_stream = TcpStream::connect("127.0.0.1:8000")?;
+        let mut send_stream = TcpStream::connect(address)?;
         let mut receive_stream = send_stream.try_clone()?;
 
         thread::spawn(move || {
